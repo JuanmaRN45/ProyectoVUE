@@ -49,6 +49,16 @@ td a:hover{
     color:#000000;
 }
 
+div#footer ul{
+    display: flex;
+    justify-content: space-around;
+}
+
+div#footer ul li{
+    display: inline-block;
+    list-style-type: none;
+}
+
 button{
     margin-top:10px;
     width: 100px;
@@ -177,7 +187,7 @@ a{
         height: 95px;
     }
 
-    ul {
+    header ul {
         position: absolute;
         width: 100%;
         height: auto;
@@ -189,12 +199,12 @@ a{
         display: block !important;
     }
 
-    ul li {
+    header ul li {
         width: 100%;
         line-height: 4.2vh;
     }
 
-    ul li a
+    header ul li a
     {
         font-size: 30px;
         font-size: 20px;
@@ -227,6 +237,12 @@ a{
 
     #divWonderLeague{
         margin: 50px 0 !important;
+    }
+
+    div#footer ul{
+        position:static;
+        background-color: #000000;
+        margin-left: -6.5%;
     }
 }
 /*---------Media Query Movil---------*/
@@ -1011,6 +1027,19 @@ p{
 
 @media (max-width: 730px) {
 
+    p.Avisoslegales{
+        font-size:2em;
+    }
+
+    input.proteccion{
+        width: 20px;
+        height: 20px;
+    }
+
+    label.proteccion{
+        font-size: 2em;
+    }
+
     nav #btnMenu {
         display: block;
     }
@@ -1150,6 +1179,20 @@ p{
     #inputfile{
         width: 135px;
     }
+
+    span{
+        display: block;
+    }
+    p.Avisoslegales{
+        font-size:1.3em;
+    }
+    label.proteccion{
+        font-size: 2em;
+    }
+    input.proteccion{
+        width: 20px;
+        height: 20px;
+    }
 }
 
 /*---------Media Query Movil---------*/
@@ -1166,6 +1209,16 @@ p{
     ul li a{
         height: 45px;
         padding-top: 25px;
+    }
+    p.Avisoslegales{
+        font-size:15px;
+    }
+    label.proteccion{
+        font-size: 2em;
+    }
+    input.proteccion{
+        width: 20px;
+        height: 20px;
     }
 }
 
@@ -1246,15 +1299,31 @@ p{
         width: 135px;
     }
 
+    p.Avisoslegales{
+        font-size:3em;
+    }
+    label.proteccion{
+        font-size: 2em;
+    }
+    input.proteccion{
+        width: 20px;
+        height: 20px;
+    }
+
 }
 
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
+span.negrita{
+    font-weight: bold;
+}
+
+a:visited{
+    color:#0ac215;
+}
+
+a{
+    color:#0ac215;
+}
+
+a#volverpag{
+    display: block;
+}

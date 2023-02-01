@@ -31,6 +31,122 @@
             </nav>
         </header>
         <div>
+            <section class="cookies">
+                <h2 class="cookies__titulo">¿Aceptas nuestras Cookies?</h2> 
+                <p class="cookies__texto">Usamos cookies para mejorar tu experiencia en la web.</p>
+                <div class="cookies__botones">
+                    <button class="cookies__boton cookies__boton--no">No</button>
+                    <button class="cookies__boton cookies__boton--si">Si</button>
+                </div>
+            </section>
+            
+            <!-- No borrar, aquí se generarán todas las etiquetas <script> si acepta el usuario -->
+            <div id="nuevosScripts"></div>
+            <script>
+                let cookies = () => {
+                    //======================================================================
+                    // COOKIES
+                    //======================================================================
+
+                    //-----------------------------------------------------
+                    // Configuración
+                    //-----------------------------------------------------
+                    const urlsScriptsCookies = ['https://analytics.google.com', 'https://facebook.com'];
+
+                    function contenidoScriptsCookies () {
+                        ////////////  ¿Google Analítics? /////////////
+                        ////////////  ¿Facebook Pixel? /////////////
+                        ////////////  ¿Admob? /////////////
+                        ////////////  etc  /////////////
+                    }
+
+
+                    //-----------------------------------------------------
+                    // Variables
+                    //-----------------------------------------------------
+                    const seccionCookie = document.querySelector('section.cookies');
+                    const cookieSi = document.querySelector('.cookies__boton--si');
+                    const cookieNo = document.querySelector('.cookies__boton--no');
+                    const nuevosScripts = document.querySelector('#nuevosScripts');
+
+                    //-----------------------------------------------------
+                    // Funciones
+                    //-----------------------------------------------------
+
+                    /**
+                     * Método que oculta la sección de Cookie para siempre
+                     */
+                    function ocultarCookie() {
+                        // Borra la sección de cookies en el HTML
+                        seccionCookie.remove();
+                    }
+
+                    /**
+                     * Método que marca las cookies como aceptadas
+                     */
+                    function aceptarCookies() {
+                        // Oculta el HTML de cookies
+                        ocultarCookie();
+                        // Guarda que ha aceptado
+                        localStorage.setItem('cookie', true);
+                        // Tu codigo a ejecutar si aceptan las cookies
+                        ejecutarSiAcepta();
+                    }
+
+                    /**
+                     * Método que marca las cookies como denegadas
+                     */
+                    function denegarCookies() {
+                        // Oculta el HTML de cookies
+                        ocultarCookie();
+                        // Guarda que ha aceptado
+                        localStorage.setItem('cookie', false);
+                    }
+
+                    /**
+                     * Método que ejecuta tu código si aceptan las cookies
+                     */
+                    function ejecutarSiAcepta() {
+                        // Crea los <script>
+                        urlsScriptsCookies.forEach((url) => {
+                            const nuevoScript = document.createElement('script');
+                            nuevoScript.setAttribute('src', url);
+                            nuevosScripts.appendChild(nuevoScript);
+                        });
+                        // Lanza los códigos
+                        contenidoScriptsCookies();
+                    }
+
+                    /**
+                     * Método que inicia la lógica
+                     */
+                    function iniciar() {
+                        // Comprueba si en el pasado el usuario ha marcado una opción
+                        if (localStorage.getItem('cookie') !== null) {
+                            if(localStorage.getItem('cookie') === 'true') {
+                                // Aceptó
+                                aceptarCookies();
+                            } else {
+                                // No aceptó
+                                denegarCookies();
+                            }
+                        }
+                    }
+
+                    //-----------------------------------------------------
+                    // Eventos
+                    //-----------------------------------------------------
+                    cookieSi.addEventListener('click',aceptarCookies, false);
+                    cookieNo.addEventListener('click',denegarCookies, false);
+
+                    return {
+                        iniciar: iniciar
+                    }
+                };
+
+                // Activa el código. Comenta si quieres desactivarlo.
+                cookies().iniciar();
+            </script>
             <div id="liga">
                 <div id="divWonderLeague">
                     <h1 tabindex="9" aria-label="titulo wonder league">WONDER LEAGUE</h1>
@@ -132,7 +248,7 @@
                         </fieldset>
                         <fieldset class="divsFormularios" id="fecha">
                             <label for="fechaaa">Fecha de Creación:&nbsp;</label><br>
-                            <input id="fechaaa"type="text">
+                            <input id="fechaaa"type="date">
                         </fieldset>
                         <fieldset class="divsFormularios" id="ligas">
                             <label for="numLigas">Nº de ligas ganadas:&nbsp;</label>
@@ -199,6 +315,12 @@
             <div id="footer">
                 <p>WONDER LEAGUE</p><br>
                 <img src="./assets/wcag2AA.png" alt="Logo WCAG 2.0 AA"/>
+                <ul>
+                    <li><a href="avisolegal.html">Aviso Legal</a></li>
+                    <li><a href="lopd.html">LOPD</a></li>
+                    <li><a href="propint.html">Derechos de Propiedad Intelectual</a></li>
+                    <li><a href="cookies.html">Aviso de Cookies</a></li>
+                </ul>
             </div>
         </div>
         <script
