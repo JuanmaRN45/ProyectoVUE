@@ -33,52 +33,60 @@ export class VistaAlta extends Vista {
       * Método para inserción en IndexedDB de los datos del formulario de alta equipos
       */
      insertarIndex(){
-          
-          let nombre = this.div.find('input').eq(1)
-          let valornombre = nombre.val()
-          
-          let descripcion = this.div.find('textarea').eq(0)
-          let valordescripcion = descripcion.val()
-          
-          let fecha = this.div.find('input').eq(2)
-          let valorfecha = fecha.val()
 
-          let ligas = this.div.find('input').eq(3)
-          let valorligas = ligas.val()
-
-          let colores1 = $('#coloreees1')
-          let colores2 = $('#coloreees2')
-          let colores3 = $('#coloreees3')
-          let colores4 = $('#coloreees4')
-          let colores5 = $('#coloreees5')
-          let colores6 = $('#coloreees6')
-
-          let colores = []
-          colores.push(colores1.is(':checked'))
-          colores.push(colores2.is(':checked'))
-          colores.push(colores3.is(':checked'))
-          colores.push(colores4.is(':checked'))
-          colores.push(colores5.is(':checked'))
-          colores.push(colores6.is(':checked'))
-          if(colores[0]==true){colores[0]='Blanco'}
-          if(colores[1]==true){colores[1]='Negro'}
-          if(colores[2]==true){colores[2]='Rojo'}
-          if(colores[3]==true){colores[3]='Azul'}
-          if(colores[4]==true){colores[4]='Verde'}
-          if(colores[5]==true){colores[5]='Amarillo'}
+          let acepto = $('#aceptodatos')
+          let valoracepto = acepto.is(':checked')
+          if(valoracepto == true){
+               let nombre = this.div.find('input').eq(1)
+               let valornombre = nombre.val()
                
-          let valorascenso=[]
-          let ascendido1 = $('#ascendido1')
-          let ascendido2 = $('#ascendido2')
-          valorascenso.push(ascendido1.is(':checked'))
-          valorascenso.push(ascendido2.is(':checked'))
-          if(valorascenso[0]==true){valorascenso[0]='Si'}
-          if(valorascenso[1]==true){valorascenso[1]='No'}
+               let descripcion = this.div.find('textarea').eq(0)
+               let valordescripcion = descripcion.val()
+               
+               let fecha = this.div.find('input').eq(2)
+               let valorfecha = fecha.val()
+
+               let ligas = this.div.find('input').eq(3)
+               let valorligas = ligas.val()
+
+               let colores1 = $('#coloreees1')
+               let colores2 = $('#coloreees2')
+               let colores3 = $('#coloreees3')
+               let colores4 = $('#coloreees4')
+               let colores5 = $('#coloreees5')
+               let colores6 = $('#coloreees6')
+
+               let colores = []
+               colores.push(colores1.is(':checked'))
+               colores.push(colores2.is(':checked'))
+               colores.push(colores3.is(':checked'))
+               colores.push(colores4.is(':checked'))
+               colores.push(colores5.is(':checked'))
+               colores.push(colores6.is(':checked'))
+               if(colores[0]==true){colores[0]='Blanco'}
+               if(colores[1]==true){colores[1]='Negro'}
+               if(colores[2]==true){colores[2]='Rojo'}
+               if(colores[3]==true){colores[3]='Azul'}
+               if(colores[4]==true){colores[4]='Verde'}
+               if(colores[5]==true){colores[5]='Amarillo'}
+                    
+               let valorascenso=[]
+               let ascendido1 = $('#ascendido1')
+               let ascendido2 = $('#ascendido2')
+               valorascenso.push(ascendido1.is(':checked'))
+               valorascenso.push(ascendido2.is(':checked'))
+               if(valorascenso[0]==true){valorascenso[0]='Si'}
+               if(valorascenso[1]==true){valorascenso[1]='No'}
+               
+               let comunidad = this.div.find('select').eq(0)
+               let valorcomunidad = comunidad.val()
+               let objeto = new Equipos(this.valorescudo,valornombre,valordescripcion,valorfecha,valorligas,colores,valorascenso,valorcomunidad)
+               this.controlador.insertar(objeto)
+          }else{
+               alert('No has aceptado la ley de protección de datos')
+          }
           
-          let comunidad = this.div.find('select').eq(0)
-          let valorcomunidad = comunidad.val()
-          let objeto = new Equipos(this.valorescudo,valornombre,valordescripcion,valorfecha,valorligas,colores,valorascenso,valorcomunidad)
-          this.controlador.insertar(objeto)
+          
      }
 
      

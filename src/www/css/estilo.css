@@ -1030,6 +1030,9 @@ p{
     p.Avisoslegales{
         font-size:2em;
     }
+    p.Avisoslegales2{
+        font-size:1.3em;
+    }
 
     input.proteccion{
         width: 20px;
@@ -1186,6 +1189,9 @@ p{
     p.Avisoslegales{
         font-size:1.3em;
     }
+    p.Avisoslegales2{
+        font-size:0.8em;
+    }
     label.proteccion{
         font-size: 2em;
     }
@@ -1212,6 +1218,9 @@ p{
     }
     p.Avisoslegales{
         font-size:15px;
+    }
+    p.Avisoslegales2{
+        font-size:25px;
     }
     label.proteccion{
         font-size: 2em;
@@ -1301,6 +1310,9 @@ p{
 
     p.Avisoslegales{
         font-size:3em;
+    }
+    p.Avisoslegales2{
+        font-size:2em;
     }
     label.proteccion{
         font-size: 2em;

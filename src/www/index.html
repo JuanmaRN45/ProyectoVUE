@@ -39,8 +39,6 @@
                     <button class="cookies__boton cookies__boton--si">Si</button>
                 </div>
             </section>
-            
-            <!-- No borrar, aquí se generarán todas las etiquetas <script> si acepta el usuario -->
             <div id="nuevosScripts"></div>
             <script>
                 let cookies = () => {
@@ -51,13 +49,9 @@
                     //-----------------------------------------------------
                     // Configuración
                     //-----------------------------------------------------
-                    const urlsScriptsCookies = ['https://analytics.google.com', 'https://facebook.com'];
+                    const urlsScriptsCookies =  ['https://analytics.google.com'];
 
                     function contenidoScriptsCookies () {
-                        ////////////  ¿Google Analítics? /////////////
-                        ////////////  ¿Facebook Pixel? /////////////
-                        ////////////  ¿Admob? /////////////
-                        ////////////  etc  /////////////
                     }
 
 
@@ -143,8 +137,6 @@
                         iniciar: iniciar
                     }
                 };
-
-                // Activa el código. Comenta si quieres desactivarlo.
                 cookies().iniciar();
             </script>
             <div id="liga">
@@ -275,7 +267,8 @@
                                 <option>Cataluña</option>
                                 <option>Andalucía</option>
                                 <option>País Vasco</option>
-                            </select>
+                            </select><br><br><br>
+                            <input name="aceptodatos"id="aceptodatos"type="checkbox"><label for="aceptodatos"><a href="lopd.html">Acepto la Política de Protección de Datos</a></label><br>
                         </fieldset>
                     </form>
                     <button class="btnEnviar">Enviar</button>
