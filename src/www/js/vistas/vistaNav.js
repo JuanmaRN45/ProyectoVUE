@@ -20,7 +20,7 @@ export function VistaNav(nav,vistaEquipos,controlador){
             <li @click=pulsarLiga tabindex="1" role="menuitem" aria-label="logo wonder league" id="flex0"><img href="./index.html"src="./assets/logo-proyecto.png" alt="Logo Wonder League"/></li>
             <li @click=pulsarLiga tabindex="2" role="menuitem"><a class="opciones" id="liLiga">Liga</a></li>
             <li @click=pulsarEquipos @mouseover=mostrarAemet Equipos tabindex="3" role="menuitem"><a class="opciones" id="liEquipos">Equipos</a></li>
-            <li @click=pulsarNavListado class="opciones" ><a id="busqueda" ><label for="busquedaaa" aria-label="botón para búsqueda"><button tabindex="4">🔎</button></label></a><input  tabindex="5"id="busquedaaa"type="text" aria-label="escribe busqueda"role="text"></li>
+            <li class="opciones" ><a id="busqueda" ><label for="busquedaaa" aria-label="botón para búsqueda"><button  @click=pulsarNavListado tabindex="4">🔎</button></label></a><input  tabindex="5"id="busquedaaa"type="text" aria-label="escribe busqueda"role="text"></li>
         </ul>
         `,
 		methods: {

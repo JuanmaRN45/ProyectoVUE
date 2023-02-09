@@ -12,7 +12,7 @@ export class idb{
         peticion.onsuccess = evento => {this.conexion = evento.target.result}
     }
     crear(){
-        const tabla = this.conexion.createObjectStore('Equipos', {autoIncrement: true})
+        const tabla = this.conexion.createObjectStore('Equipos', { keyPath: 'id', autoIncrement: true })
     }
     /**
      * 

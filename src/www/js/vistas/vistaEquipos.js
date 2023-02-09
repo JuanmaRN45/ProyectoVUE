@@ -7,6 +7,7 @@ export function VistaEquipos(divEquipos,controlador){
 				lista: [{
 					nombre: 'hola',
 				}],
+				i:1,
 				divWonder: $('.divWonder').eq(1),
 				footer: $('#footer').eq(0),
 			}
@@ -40,7 +41,7 @@ export function VistaEquipos(divEquipos,controlador){
 				</div>
 				<div class="divsFormularios btnEditar">
 					<button>Editar</button>
-					<button @click=borrar()>Eliminar</button>
+					<button @click=borrar(listas.id)>Eliminar</button>
 				</div>
 			</div>
 		</div>
@@ -50,11 +51,14 @@ export function VistaEquipos(divEquipos,controlador){
           		this.listar()
 			},
 			mostrarAemet(){
-				this.copy = $('<p></p>')
-				this.copy.attr('tabindex',800)
-				this.copy.attr('aria-label',this.copy.val())
-				this.footer.append(this.copy)
-				this.aemet()
+				if(this.i==1){
+					this.copy = $('<p></p>')
+					this.copy.attr('tabindex',800)
+					this.copy.attr('aria-label',this.copy.val())
+					this.footer.append(this.copy)
+					this.i=2
+					this.aemet()	
+				}
 			},
 			
 			mostrar(ver){
@@ -86,7 +90,6 @@ export function VistaEquipos(divEquipos,controlador){
 						// Obtener los datos de la respuesta
 						$.ajax(response.datos)
 								.done((response) => {
-									this.copy.val()
 									this.copy.text(response)
 								})
 					}
@@ -109,13 +112,14 @@ export function VistaEquipos(divEquipos,controlador){
 					}).bind(this)
 				}).bind(this)
 			},
-			borrar(){
+			borrar(id){
 				const peticion =window.indexedDB.open("WonderLeague")
 				peticion.onsuccess= ((evento) =>{
 					this.bd=evento.target.result;
-					const peticion = this.bd.transaction('Equipos', 'readwrite').objectStore('Equipos').delete();
+					const peticion = this.bd.transaction('Equipos', 'readwrite').objectStore('Equipos').delete(id);
 					const peticion2 = this.bd.transaction('Equipos', 'readonly').objectStore('Equipos').getAll();
 				}).bind(this)
+				this.controlador.pulsarNavLiga()
 			}
 		},
 		
