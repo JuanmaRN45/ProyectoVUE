@@ -1,50 +1,52 @@
-"use strict"
-import {VistaLiga} from '../vistas/vistaLiga.js'
-import {VistaAlta} from '../vistas/vistaAlta.js'
 import {VistaEquipos} from '../vistas/vistaEquipos.js'
-import {VistaModTabla} from '../vistas/vistaModTabla.js'
-import {VistaModEquipo} from '../vistas/vistaModEquipo.js'
-import { VistaListado } from '../vistas/vistaListado.js'
-/**
- *	Implementa una vista del menú de navegación del administrador.
- */
-export class VistaNav{
-	/**
-	 *	Constructor de la clase.
-	 *	@param {HTMLElement} nav Nav de HTML en el que se desplegará la vista.
-	 *	@param {Object} controlador Controlador de la vista del administrador.
-	 */
-	constructor(nav, controlador) {
-		this.controlador = controlador
-		this.nav = nav
 
-		/*Botones nav*/
-		this.btnLogo = $('li').eq(0)
-		this.btnLiga = $('li').eq(1)
-		this.btnEquipos = $('li').eq(2)
-		this.btnBusqueda = $('li').eq(3)
-		this.btnLogo.on( "click", this.pulsarLiga.bind(this) );
-		this.btnLiga.on( "click", this.pulsarLiga.bind(this))
-		this.btnEquipos.on( "click", this.pulsarEquipos.bind(this))
-		this.btnBusqueda.on( "click", this.pulsarNavListado.bind(this))
-		
-	}
-	/**
-	 * método para ir a la vista liga al pulsar el botón de liga del menú y el logo
-	 */
-	pulsarLiga() {
-		this.controlador.pulsarNavLiga()
-	}
-	/**
-	 * método para ir a la vista equipos al pulsar el botón de equipos del menú
-	 */
-	pulsarEquipos() {
-		this.controlador.pulsarNavEquipos()
-	}
-	/**
-	 * método para ir a la vista de la búsqueda al pulsar el botón de la lupa del menú
-	 */
-	pulsarNavListado() {
-		this.controlador.pulsarListado()
-	}
+export function VistaNav(nav,vistaEquipos,controlador){
+	return Vue.createApp({
+		data() {
+			return {
+				controlador: controlador,
+				nav: nav,
+                equipos: vistaEquipos,
+			}
+            
+		},
+		template: 
+		`
+        <input type="checkbox" id="check" />
+        <label tabindex="2" role="menuitemcheckbox" for="check" id="btnMenu" >
+            <img src="./assets/menu.png" alt="Icono de menú"/>
+        </label>
+        <ul>
+            <li @click=pulsarLiga tabindex="1" role="menuitem" aria-label="logo wonder league" id="flex0"><img href="./index.html"src="./assets/logo-proyecto.png" alt="Logo Wonder League"/></li>
+            <li @click=pulsarLiga tabindex="2" role="menuitem"><a class="opciones" id="liLiga">Liga</a></li>
+            <li @click=pulsarEquipos @mouseover=mostrarAemet Equipos tabindex="3" role="menuitem"><a class="opciones" id="liEquipos">Equipos</a></li>
+            <li @click=pulsarNavListado class="opciones" ><a id="busqueda" ><label for="busquedaaa" aria-label="botón para búsqueda"><button tabindex="4">🔎</button></label></a><input  tabindex="5"id="busquedaaa"type="text" aria-label="escribe busqueda"role="text"></li>
+        </ul>
+        `,
+		methods: {
+            /**
+             * método para ir a la vista liga al pulsar el botón de liga del menú y el logo
+             */
+            pulsarLiga() {
+                this.controlador.pulsarNavLiga()
+            },
+            /**
+             * método para ir a la vista equipos al pulsar el botón de equipos del menú
+             */
+            pulsarEquipos() {
+                this.controlador.pulsarNavEquipos()
+                this.equipos.pulsarEquipo()
+            },
+            /**
+             * método para ir a la vista de la búsqueda al pulsar el botón de la lupa del menú
+             */
+            pulsarNavListado() {
+                this.controlador.pulsarListado()
+            },
+            mostrarAemet() {
+                this.equipos.mostrarAemet()
+            },
+			
+		}
+	})
 }

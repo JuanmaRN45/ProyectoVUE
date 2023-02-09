@@ -1,93 +1,101 @@
-"use strict" //activo modo estricto
-import { Equipos } from '../modelos/equipos.js'
-import {Vista} from './vista.js'
+import {Equipos} from '../modelos/equipos.js'
+export function VistaAlta(divAlta,controlador){
+	return Vue.createApp({
+		data() {
+			return {
+				controlador: controlador,
+				div: divAlta,
+                datos:{
+                    escudo: '',
+                    nombre: '',
+                    descripcion: '',
+                    fecha: '',
+                    liga: '',
+                    colores: '',
+                    ascendido: '',
+                    comunidad: '',
+                    terminos: '',
+                    base64: null,
+                }
+			}
+		},
+		template:
+		`
+        <div id="divWonderLeague">
+            <h1>AÑADIR NUEVO EQUIPO</h1>
+            <form>
+                <fieldset class="divsFormularios" id="escudo">
+                    <label for="inputfile">Escudo:&nbsp;</label>
+                    <input id="inputfile" type="file" :src=datos.escudo @change=imagen1 accept="image/*">
+                </fieldset>
+                <fieldset class="divsFormularios" id="nombre">
+                    <label for="nombreee">Nombre:&nbsp;</label>
+                    <input id="nombreee" type="text" v-model="datos.nombre">
+                </fieldset>
+                <fieldset class="divsFormularios" id="descripcion">
+                    <label for="descripciooon">Descripción:</label><br>
+                    <textarea id="descripciooon" v-model="datos.descripcion"></textarea>
+                </fieldset>
+                <fieldset class="divsFormularios" id="fecha">
+                    <label for="fechaaa">Fecha de Creación:&nbsp;</label><br>
+                    <input id="fechaaa"type="date" v-model="datos.fecha">
+                </fieldset>
+                <fieldset class="divsFormularios" id="ligas">
+                    <label for="numLigas">Nº de ligas ganadas:&nbsp;</label>
+                    <input id="numLigas"type="number" v-model="datos.ligas">
+                </fieldset>
+                <fieldset class="divsFormularios" id="colores">
+                    <label for="coloreees">Colores del Equipo:</label><br>
+                    <input name="colores"id="coloreees1"type="checkbox" v-model="datos.colores"><label for="coloreees1">Blanco</label><br>
+                    <input name="colores"id="coloreees2"type="checkbox" v-model="datos.colores1"><label for="coloreees2">Negro</label><br>
+                    <input name="colores"id="coloreees3"type="checkbox" v-model="datos.colores2"><label for="coloreees3">Rojo</label><br>
+                    <input name="colores"id="coloreees4"type="checkbox" v-model="datos.colores3"><label for="coloreees4">Azul</label><br>
+                    <input name="colores"id="coloreees5"type="checkbox" v-model="datos.colores4"><label for="coloreees5">Verde</label><br>
+                    <input name="colores"id="coloreees6"type="checkbox" v-model="datos.colores5"><label for="coloreees6">Amarillo</label>
+                </fieldset>
+                <fieldset class="divsFormularios" id="ascenso">
+                    <label for="ascendido">Recien ascendido:</label><br>
+                    <input aria-lable="selección si om no es recien ascendido" v-model="datos.ascendido" id="ascendido1"  type="radio" name="ascendido"><label for="ascendido1">Sí</label><br>
+                    <input id="ascendido2" type="radio" v-model="datos.ascendido" name="ascendido"><label for="ascendido2">No</label>
+                </fieldset>
+                <fieldset class="divsFormularios" id="titulos">
+                    <label for="comunidad">Comunidad Autónoma</label><br>
+                    <select id="comunidad"  v-model="datos.comunidad">
+                        <option id="comunidad" aria-label="selector desplegable de comunidad autónoma">Comunidad de Madrid</option>
+                        <option>Cataluña</option>
+                        <option>Andalucía</option>
+                        <option>País Vasco</option>
+                    </select><br><br><br>
+                    <input name="aceptodatos" v-model="datos.terminos" id="aceptodatos"type="checkbox"><label for="aceptodatos"><a href="lopd.html">Acepto la Política de Protección de Datos</a></label><br>
+                </fieldset>
+            </form>
+            <button @click=insertarIndex2 class="btnEnviar">Enviar</button>
+        </div>
+        `,
+		methods: {
+			mostrar(ver){
+				if (ver)
+					this.div.show(1)
+				else
+					this.div.hide(1)
+			},
+            /**
+             * Método para inserción en IndexedDB de los datos del formulario de alta equipos
+             */
+            insertarIndex2(){
+                let objeto = new Equipos(this.datos.base64,this.datos.nombre,this.datos.descripcion,this.datos.fecha,this.datos.ligas,this.datos.colores,this.datos.ascendido,this.datos.comunidad,this.datos.terminos)
+                this.controlador.insertar(objeto)
+            },
+            imagen1(event){
+                let imagen = document.getElementById('inputfile')
+                const archivo = imagen.files[0]
+                const lector = new FileReader()
 
-export class VistaAlta extends Vista {
-
-	/**
-     * Contructor de la clase VistaAlta
-     * @param {HTMLDivElement} div Div de la vista
-     * @param {Object} controlador Controlador de la vista
-     */
-	constructor(div, controlador) {
-		super(div)
-          this.controlador = controlador
-
-          this.div = $('#alta')
-          this.escudo =  $('#inputfile')
-          this.valorescudo = null
-          this.escudo.on('change', e => {
-
-               const archivo = this.escudo[0].files[0]
-               const lector = new FileReader()
-               lector.addEventListener('load',() => {
-                    this.valorescudo = lector.result
-               })
-               lector.readAsDataURL(archivo)
-          })
-          /*Botones pantalla liga*/
-		this.btnEnviar = this.div.find('button').eq(0)
-		this.btnEnviar.on( "click", this.insertarIndex.bind(this) ); 
-	}
-     /**
-      * Método para inserción en IndexedDB de los datos del formulario de alta equipos
-      */
-     insertarIndex(){
-
-          let acepto = $('#aceptodatos')
-          let valoracepto = acepto.is(':checked')
-          if(valoracepto == true){
-               let nombre = this.div.find('input').eq(1)
-               let valornombre = nombre.val()
-               
-               let descripcion = this.div.find('textarea').eq(0)
-               let valordescripcion = descripcion.val()
-               
-               let fecha = this.div.find('input').eq(2)
-               let valorfecha = fecha.val()
-
-               let ligas = this.div.find('input').eq(3)
-               let valorligas = ligas.val()
-
-               let colores1 = $('#coloreees1')
-               let colores2 = $('#coloreees2')
-               let colores3 = $('#coloreees3')
-               let colores4 = $('#coloreees4')
-               let colores5 = $('#coloreees5')
-               let colores6 = $('#coloreees6')
-
-               let colores = []
-               colores.push(colores1.is(':checked'))
-               colores.push(colores2.is(':checked'))
-               colores.push(colores3.is(':checked'))
-               colores.push(colores4.is(':checked'))
-               colores.push(colores5.is(':checked'))
-               colores.push(colores6.is(':checked'))
-               if(colores[0]==true){colores[0]='Blanco'}
-               if(colores[1]==true){colores[1]='Negro'}
-               if(colores[2]==true){colores[2]='Rojo'}
-               if(colores[3]==true){colores[3]='Azul'}
-               if(colores[4]==true){colores[4]='Verde'}
-               if(colores[5]==true){colores[5]='Amarillo'}
-                    
-               let valorascenso=[]
-               let ascendido1 = $('#ascendido1')
-               let ascendido2 = $('#ascendido2')
-               valorascenso.push(ascendido1.is(':checked'))
-               valorascenso.push(ascendido2.is(':checked'))
-               if(valorascenso[0]==true){valorascenso[0]='Si'}
-               if(valorascenso[1]==true){valorascenso[1]='No'}
-               
-               let comunidad = this.div.find('select').eq(0)
-               let valorcomunidad = comunidad.val()
-               let objeto = new Equipos(this.valorescudo,valornombre,valordescripcion,valorfecha,valorligas,colores,valorascenso,valorcomunidad)
-               this.controlador.insertar(objeto)
-          }else{
-               alert('No has aceptado la ley de protección de datos')
-          }
-          
-          
-     }
-
-     
+                lector.addEventListener('load',() => {
+                    this.datos.base64 = lector.result
+                })
+                lector.readAsDataURL(archivo)
+            }
+		}
+	})
 }

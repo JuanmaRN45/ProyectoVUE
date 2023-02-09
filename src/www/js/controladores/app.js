@@ -1,14 +1,10 @@
 "use strict" //activo modo estricto
 import {Modelo} from '../modelos/modelo.js'
-import {Equipos} from '../modelos/equipos.js'
-import {idb} from '../modelos/idb.js'
 import {VistaNav} from '../vistas/vistaNav.js'
 import {VistaLiga} from '../vistas/vistaLiga.js'
 import {VistaAlta} from '../vistas/vistaAlta.js'
 import {VistaEquipos} from '../vistas/vistaEquipos.js'
-import {VistaModTabla} from '../vistas/vistaModTabla.js'
-import {VistaModEquipo} from '../vistas/vistaModEquipo.js'
-import { VistaListado } from '../vistas/vistaListado.js'
+import {VistaListado } from '../vistas/vistaListado.js'
 
 /**
  * Clase Controlador que administra las vistas
@@ -33,26 +29,21 @@ class Controlador {
 	 * Método iniciarVistar que se ejecuta al iniciar el modelo
 	 */
 	iniciarVistas() {
-		this.nav = $('nav')
-		this.vistaNav = new VistaNav(this.nav, this)
 
         this.divLiga = $('#liga')
-        this.vistaLiga = new VistaLiga(this.divLiga, this)
+        this.vistaLiga = new VistaLiga(this.divLiga, this).mount('#liga')
 
         this.divEquipos = $('#equipos')
-        this.vistaEquipos = new VistaEquipos(this.divEquipos, this)
+        this.vistaEquipos = new VistaEquipos(this.divEquipos, this).mount('#equipos')
+
+		this.nav = $('nav')
+		this.vistaNav = new VistaNav(this.nav,this.vistaEquipos, this).mount('nav')
 
 		this.divAlta= $('#alta')
-		this.vistaAlta=new VistaAlta(this.divAlta, this);
-
-		this.divModTabla = $('#modTabla')
-        this.vistaModTabla = new VistaModTabla(this.divModTabla, this)
-
-		this.divModEquipo = $('#modEquipo')
-		this.vistaModEquipo = new VistaModEquipo(this.divModEquipo, this)
+		this.vistaAlta=new VistaAlta(this.divAlta, this).mount('#alta')
 
 		this.divListado = $('#listado')
-		this.vistaListado = new VistaListado(this.divListado, this)
+		this.vistaListado = new VistaListado(this.divListado, this).mount('#listado')
 		this.pulsarNavLiga()
 	}
 
@@ -60,8 +51,6 @@ class Controlador {
 		this.vistaLiga.mostrar(false)
 		this.vistaEquipos.mostrar(false)
 		this.vistaAlta.mostrar(false)
-		this.vistaModTabla.mostrar(false)
-		this.vistaModEquipo.mostrar(false)
 		this.vistaListado.mostrar(false)
 	}
 	pulsarNavLiga() {
@@ -72,16 +61,6 @@ class Controlador {
 	pulsarNavEquipos() {
 		this.ocultarVistas()
 		this.vistaEquipos.mostrar(true)
-	}
-
-	pulsarModTabla() {
-		this.ocultarVistas()
-		this.vistaModTabla.mostrar(true)
-	}
-
-	pulsarModEquipo() {
-		this.ocultarVistas()
-		this.vistaModEquipo.mostrar(true)
 	}
 
 	pulsarAlta() {

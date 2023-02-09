@@ -10,6 +10,7 @@
         <link rel="stylesheet" type="text/css" href="../www/assets/jquery-ui-1.13.2.custom/jquery-ui.theme.css">
         <link rel="stylesheet" type="text/css" href="../www/css/estilo.css">
         <link rel="shortcut icon" href="./assets/logo-proyecto-nombre.png"/>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 	</head>
     <body>
          <!-- CABECERA -->
@@ -218,61 +219,11 @@
                 <button id="anaaaaadir">Añadir Equipo</button>
             </div>
             <div id="equipos">
-                <div id="divWonderLeague" class="divWonder">
-                    <h1> EQUIPOS </h1>
-                </div>
+                    
+            </div>
             </div>
             <div id="alta">
-                <div id="divWonderLeague">
-                    <h1>AÑADIR NUEVO EQUIPO</h1>
-                    <form>
-                        <fieldset class="divsFormularios" id="escudo">
-                            <label for="inputfile">Escudo:&nbsp;</label>
-                            <input id="inputfile" type="file" accept="image/*">
-                        </fieldset>
-                        <fieldset class="divsFormularios" id="nombre">
-                            <label for="nombreee">Nombre:&nbsp;</label>
-                            <input id="nombreee" type="text">
-                        </fieldset>
-                        <fieldset class="divsFormularios" id="descripcion">
-                            <label for="descripciooon">Descripción:</label><br>
-                            <textarea id="descripciooon"></textarea>
-                        </fieldset>
-                        <fieldset class="divsFormularios" id="fecha">
-                            <label for="fechaaa">Fecha de Creación:&nbsp;</label><br>
-                            <input id="fechaaa"type="date">
-                        </fieldset>
-                        <fieldset class="divsFormularios" id="ligas">
-                            <label for="numLigas">Nº de ligas ganadas:&nbsp;</label>
-                            <input id="numLigas"type="number">
-                        </fieldset>
-                        <fieldset class="divsFormularios" id="colores">
-                            <label for="coloreees">Colores del Equipo:</label><br>
-                            <input name="colores"id="coloreees1"type="checkbox"><label for="coloreees1">Blanco</label><br>
-                            <input name="colores"id="coloreees2"type="checkbox"><label for="coloreees2">Negro</label><br>
-                            <input name="colores"id="coloreees3"type="checkbox"><label for="coloreees3">Rojo</label><br>
-                            <input name="colores"id="coloreees4"type="checkbox"><label for="coloreees4">Azul</label><br>
-                            <input name="colores"id="coloreees5"type="checkbox"><label for="coloreees5">Verde</label><br>
-                            <input name="colores"id="coloreees6"type="checkbox"><label for="coloreees6">Amarillo</label>
-                        </fieldset>
-                        <fieldset class="divsFormularios" id="ascenso">
-                            <label for="ascendido">Recien ascendido:</label><br>
-                            <input aria-lable="selección si om no es recien ascendido" id="ascendido1"  type="radio" name="ascendido"><label for="ascendido1">Sí</label><br>
-                            <input id="ascendido2" type="radio" name="ascendido"><label for="ascendido2">No</label>
-                        </fieldset>
-                        <fieldset class="divsFormularios" id="titulos">
-                            <label for="comunidad">Comunidad Autónoma</label><br>
-                            <select id="comunidad">
-                                <option id="comunidad" aria-label="selector desplegable de comunidad autónoma">Comunidad de Madrid</option>
-                                <option>Cataluña</option>
-                                <option>Andalucía</option>
-                                <option>País Vasco</option>
-                            </select><br><br><br>
-                            <input name="aceptodatos"id="aceptodatos"type="checkbox"><label for="aceptodatos"><a href="lopd.html">Acepto la Política de Protección de Datos</a></label><br>
-                        </fieldset>
-                    </form>
-                    <button class="btnEnviar">Enviar</button>
-                </div>
+                
             </div>
             <div id="listado">
                 <div id="divWonderLeague">
@@ -321,7 +272,6 @@
             integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
             crossorigin="anonymous">
         </script>
-        <script type="text/javascript" src="../www/assets/jquery-ui-1.13.2.custom/jquery-ui.min.js"></script>
         <script type="module" src="./js/controladores/app.js"></script>
     </body>
 </html>
