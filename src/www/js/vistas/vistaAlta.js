@@ -38,20 +38,20 @@ export function VistaAlta(divAlta,controlador){
                 </fieldset>
                 <fieldset class="divsFormularios" id="fecha">
                     <label for="fechaaa">Fecha de Creación:&nbsp;</label><br>
-                    <input id="fechaaa"type="date" v-model="datos.fecha">
+                    <input id="fechaaa" type="date" v-model="datos.fecha">
                 </fieldset>
                 <fieldset class="divsFormularios" id="ligas">
                     <label for="numLigas">Nº de ligas ganadas:&nbsp;</label>
-                    <input id="numLigas"type="number" v-model="datos.ligas">
+                    <input id="numLigas" type="number" v-model="datos.ligas">
                 </fieldset>
                 <fieldset class="divsFormularios" id="colores">
                     <label for="coloreees">Colores del Equipo:</label><br>
-                    <input name="colores"id="coloreees1"type="checkbox" v-model="datos.colores"><label for="coloreees1">Blanco</label><br>
-                    <input name="colores"id="coloreees2"type="checkbox" v-model="datos.colores1"><label for="coloreees2">Negro</label><br>
-                    <input name="colores"id="coloreees3"type="checkbox" v-model="datos.colores2"><label for="coloreees3">Rojo</label><br>
-                    <input name="colores"id="coloreees4"type="checkbox" v-model="datos.colores3"><label for="coloreees4">Azul</label><br>
-                    <input name="colores"id="coloreees5"type="checkbox" v-model="datos.colores4"><label for="coloreees5">Verde</label><br>
-                    <input name="colores"id="coloreees6"type="checkbox" v-model="datos.colores5"><label for="coloreees6">Amarillo</label>
+                    <input name="colores" id="coloreees1" type="checkbox" v-model="datos.colores"><label for="coloreees1">Blanco</label><br>
+                    <input name="colores" id="coloreees2" type="checkbox" v-model="datos.colores1"><label for="coloreees2">Negro</label><br>
+                    <input name="colores" id="coloreees3" type="checkbox" v-model="datos.colores2"><label for="coloreees3">Rojo</label><br>
+                    <input name="colores" id="coloreees4" type="checkbox" v-model="datos.colores3"><label for="coloreees4">Azul</label><br>
+                    <input name="colores" id="coloreees5" type="checkbox" v-model="datos.colores4"><label for="coloreees5">Verde</label><br>
+                    <input name="colores" id="coloreees6" type="checkbox" v-model="datos.colores5"><label for="coloreees6">Amarillo</label>
                 </fieldset>
                 <fieldset class="divsFormularios" id="ascenso">
                     <label for="ascendido">Recien ascendido:</label><br>
@@ -60,13 +60,13 @@ export function VistaAlta(divAlta,controlador){
                 </fieldset>
                 <fieldset class="divsFormularios" id="titulos">
                     <label for="comunidad">Comunidad Autónoma</label><br>
-                    <select id="comunidad"  v-model="datos.comunidad">
+                    <select id="comunidad" v-model="datos.comunidad">
                         <option id="comunidad" aria-label="selector desplegable de comunidad autónoma">Comunidad de Madrid</option>
                         <option>Cataluña</option>
                         <option>Andalucía</option>
                         <option>País Vasco</option>
                     </select><br><br><br>
-                    <input name="aceptodatos" v-model="datos.terminos" id="aceptodatos"type="checkbox"><label for="aceptodatos"><a href="lopd.html">Acepto la Política de Protección de Datos</a></label><br>
+                    <input name="aceptodatos" v-model="datos.terminos" id="aceptodatos" type="checkbox"><label for="aceptodatos"><a href="lopd.html">Acepto la Política de Protección de Datos</a></label><br>
                 </fieldset>
             </form>
             <button @click=insertarIndex2 class="btnEnviar">Enviar</button>
@@ -83,8 +83,14 @@ export function VistaAlta(divAlta,controlador){
              * Método para inserción en IndexedDB de los datos del formulario de alta equipos
              */
             insertarIndex2(){
-                let objeto = new Equipos(this.datos.base64,this.datos.nombre,this.datos.descripcion,this.datos.fecha,this.datos.ligas,this.datos.colores,this.datos.ascendido,this.datos.comunidad,this.datos.terminos)
-                this.controlador.insertar(objeto)
+                if(this.datos.terminos==true){
+                    let objeto = new Equipos(this.datos.base64,this.datos.nombre,this.datos.descripcion,this.datos.fecha,this.datos.ligas,this.datos.colores,this.datos.ascendido,this.datos.comunidad,this.datos.terminos)
+                    this.controlador.insertar(objeto)  
+                }
+                else{
+                    alert('Acepta la Política de Protección de Datos para poder continuar.')
+                }
+                
             },
             imagen1(event){
                 let imagen = document.getElementById('inputfile')
