@@ -33,74 +33,79 @@
         </header>
         <div>
             <section class="cookies">
-                <h2 class="cookies__titulo">¿Aceptas nuestras Cookies?</h2> 
-                <p class="cookies__texto">Usamos cookies para mejorar tu experiencia en la web.</p>
+                <h2 class="cookies__titulo">Aceptas nuestras Cookies?</h2> 
+                <p class="cookies__texto">Usamos estas Cookies para mejorar su experiencias en nuestra web</p>
+                <div>
+                    <div></div>
+                    <div>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label" for="seguimientoVistas">Seguimiento de Visitas de usuario</label>
+                            <input type="checkbox" class="form-check-input" id="seguimientoVistas">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-check form-switch">
+                            <label class="form-check-label" for="ultimoElemento">Último elemento insertado</label>
+                            <input type="checkbox" class="form-check-input" id="ultimoElemento">
+                        </div>
+                    </div>
+                </div>
+                <a href="./cookies.html" class="cookies__texto" id="terms">Más información</a>
                 <div class="cookies__botones">
-                    <button class="cookies__boton cookies__boton--no">No</button>
-                    <button class="cookies__boton cookies__boton--si">Si</button>
+                    <button class="cookies__boton cookies__boton--no"><span>No</span></button>
+                    <button class="cookies__boton cookies__boton--si"><span>Si</span></button>
+                    <button class="cookies__boton cookies__boton--per"><span>Personalizado</span></button>
                 </div>
             </section>
             <div id="nuevosScripts"></div>
-            <script>
+            <script defer>
                 let cookies = () => {
-                    //======================================================================
-                    // COOKIES
-                    //======================================================================
-
-                    //-----------------------------------------------------
-                    // Configuración
-                    //-----------------------------------------------------
-                    const urlsScriptsCookies =  ['https://analytics.google.com'];
-
+                    const urlsScriptsCookies = ['https://analytics.google.com'];
+        
                     function contenidoScriptsCookies () {
+                        let veces = parseInt(localStorage.getItem('cookieVisitas'))
+                        
+                        localStorage.setItem('cookieVisitas', ++veces)
                     }
-
-
-                    //-----------------------------------------------------
+        
                     // Variables
-                    //-----------------------------------------------------
                     const seccionCookie = document.querySelector('section.cookies');
                     const cookieSi = document.querySelector('.cookies__boton--si');
                     const cookieNo = document.querySelector('.cookies__boton--no');
+                    const cookiePer = document.querySelector('.cookies__boton--per');
                     const nuevosScripts = document.querySelector('#nuevosScripts');
-
-                    //-----------------------------------------------------
+        
+                    const cookieVisitas = document.querySelector('#seguimientoVistas')
+                    const cookieUltimo = document.querySelector('#ultimoElemento')
+        
                     // Funciones
-                    //-----------------------------------------------------
-
-                    /**
-                     * Método que oculta la sección de Cookie para siempre
-                     */
+        
                     function ocultarCookie() {
-                        // Borra la sección de cookies en el HTML
                         seccionCookie.remove();
                     }
-
-                    /**
-                     * Método que marca las cookies como aceptadas
-                     */
+        
                     function aceptarCookies() {
                         // Oculta el HTML de cookies
                         ocultarCookie();
                         // Guarda que ha aceptado
-                        localStorage.setItem('cookie', true);
+                        if(!localStorage.getItem('cookieAceptadas')){
+                            localStorage.setItem('cookieAceptadas', true);
+                            localStorage.setItem('cookieVisitas', 1)
+                            localStorage.setItem('cookieUltimo', true)
+                        }
                         // Tu codigo a ejecutar si aceptan las cookies
                         ejecutarSiAcepta();
                     }
-
-                    /**
-                     * Método que marca las cookies como denegadas
-                     */
                     function denegarCookies() {
                         // Oculta el HTML de cookies
                         ocultarCookie();
                         // Guarda que ha aceptado
-                        localStorage.setItem('cookie', false);
+                        //localStorage.setItem('cookie', false);
+                        localStorage.setItem('cookieAceptadas', false);
+                        localStorage.setItem('cookieVisitas', false)
+                        localStorage.setItem('cookieUltimo', false)
                     }
-
-                    /**
-                     * Método que ejecuta tu código si aceptan las cookies
-                     */
+        
                     function ejecutarSiAcepta() {
                         // Crea los <script>
                         urlsScriptsCookies.forEach((url) => {
@@ -108,36 +113,40 @@
                             nuevoScript.setAttribute('src', url);
                             nuevosScripts.appendChild(nuevoScript);
                         });
-                        // Lanza los códigos
                         contenidoScriptsCookies();
                     }
-
-                    /**
-                     * Método que inicia la lógica
-                     */
+        
+                    function personalizarCookies(){
+                        ocultarCookie()
+        
+                        localStorage.setItem('cookieAceptadas', true);
+                        if(cookieVisitas.checked)
+                            localStorage.setItem('cookieVisitas', 1)
+                        if(cookieUltimo.checked)
+                            localStorage.setItem('cookieUltimo', true)
+                    }
+        
                     function iniciar() {
-                        // Comprueba si en el pasado el usuario ha marcado una opción
-                        if (localStorage.getItem('cookie') !== null) {
-                            if(localStorage.getItem('cookie') === 'true') {
-                                // Aceptó
+                        if (localStorage.getItem('cookieAceptadas') !== null) {
+                            
+                            if(localStorage.getItem('cookieAceptadas') === 'true') {
+                                
                                 aceptarCookies();
                             } else {
-                                // No aceptó
+                                
                                 denegarCookies();
                             }
                         }
                     }
-
-                    //-----------------------------------------------------
+        
                     // Eventos
-                    //-----------------------------------------------------
                     cookieSi.addEventListener('click',aceptarCookies, false);
                     cookieNo.addEventListener('click',denegarCookies, false);
-
+                    cookiePer.addEventListener('click',personalizarCookies, false);
                     return {
                         iniciar: iniciar
                     }
-                };
+                }
                 cookies().iniciar();
             </script>
             <div id="liga">
