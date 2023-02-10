@@ -66,7 +66,7 @@ export function VistaAlta(divAlta,controlador){
                         <option>Andalucía</option>
                         <option>País Vasco</option>
                     </select><br><br><br>
-                    <input name="aceptodatos" v-model="datos.terminos" id="aceptodatos" type="checkbox"><label for="aceptodatos"><a href="lopd.html">Acepto la Política de <br>Protección de Datos</a></label><br>
+                    <input name="aceptodatos" v-model="datos.terminos" id="aceptodatos" type="checkbox"><label for="aceptodatos"><a href="lopd.html">Acepto sin reservas<br>la política de protección de datos personales</a></label><br>
                 </fieldset>
             </form>
             <button @click=insertarIndex2 class="btnEnviar">Enviar</button>
