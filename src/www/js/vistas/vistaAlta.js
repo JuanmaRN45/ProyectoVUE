@@ -11,7 +11,7 @@ export function VistaAlta(divAlta,controlador){
                     descripcion: '',
                     fecha: '',
                     liga: '',
-                    colores: '',
+                    colores: [],
                     ascendido: '',
                     comunidad: '',
                     terminos: '',
@@ -46,12 +46,12 @@ export function VistaAlta(divAlta,controlador){
                 </fieldset>
                 <fieldset class="divsFormularios" id="colores">
                     <label for="coloreees">Colores del Equipo:</label><br>
-                    <input name="colores" id="coloreees1" type="checkbox" v-model="datos.colores"><label for="coloreees1">Blanco</label><br>
-                    <input name="colores" id="coloreees2" type="checkbox" v-model="datos.colores"><label for="coloreees2">Negro</label><br>
-                    <input name="colores" id="coloreees3" type="checkbox" v-model="datos.colores"><label for="coloreees3">Rojo</label><br>
-                    <input name="colores" id="coloreees4" type="checkbox" v-model="datos.colores"><label for="coloreees4">Azul</label><br>
-                    <input name="colores" id="coloreees5" type="checkbox" v-model="datos.colores"><label for="coloreees5">Verde</label><br>
-                    <input name="colores" id="coloreees6" type="checkbox" v-model="datos.colores"><label for="coloreees6">Amarillo</label>
+                    <input name="colores" id="coloreees1" type="checkbox" value="Blanco" v-model="datos.colores"><label for="coloreees1">Blanco</label><br>
+                    <input name="colores" id="coloreees2" type="checkbox" value="Negro" v-model="datos.colores"><label for="coloreees2">Negro</label><br>
+                    <input name="colores" id="coloreees3" type="checkbox" value="Rojo" v-model="datos.colores"><label for="coloreees3">Rojo</label><br>
+                    <input name="colores" id="coloreees4" type="checkbox" value="Azul" v-model="datos.colores"><label for="coloreees4">Azul</label><br>
+                    <input name="colores" id="coloreees5" type="checkbox" value="Verde" v-model="datos.colores"><label for="coloreees5">Verde</label><br>
+                    <input name="colores" id="coloreees6" type="checkbox" value="Amarillo" v-model="datos.colores6"><label for="coloreees6">Amarillo</label>
                 </fieldset>
                 <fieldset class="divsFormularios" id="ascenso">
                     <label for="ascendido">Recien ascendido:</label><br>
@@ -109,7 +109,7 @@ export function VistaAlta(divAlta,controlador){
                     this.datos.descripcion= ''
                     this.datos.fecha= ''
                     this.datos.liga= ''
-                    this.datos.colores= ''
+                    this.datos.colores= []
                     this.datos.ascendido= ''
                     this.datos.comunidad= ''
                     this.datos.terminos= ''

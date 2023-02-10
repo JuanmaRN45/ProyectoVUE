@@ -8,6 +8,11 @@ export class Equipos{
 		this.fechaCreacion = valorfecha
 		this.ligasGanadas = valorligas
 		this.colores= colores
+		let clon = new Set()
+        for(let item of colores){
+            clon.add(item)
+        }
+        this.colores=clon
 		this.ascendido = valorascenso
 		this.comunidad = valorcomunidad
 		this.terminos = terminos
